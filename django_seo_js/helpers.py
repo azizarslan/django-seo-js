@@ -10,6 +10,9 @@ def update_cache_for_url(url):
 
 
 def request_should_be_ignored(request):
+    if "HTTP_X_PRERENDER" in request.META:
+        return True
+
     for url in settings.IGNORE_URLS:
         if url in request.path:
             return True
